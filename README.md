@@ -16,8 +16,7 @@
   
    
   Extension : .tf
-  
-  
+    
   Advantages of Terraform
   
   1. Version controlling
@@ -62,6 +61,13 @@
 	 resource "aws_resource" "first machine"{
 	   ami=" "
 	   resource_type='
-	 
-	 
-	 }
+}
+
+Terraform Setup:
+1. Create user in aws IAM with adminaccess
+2. Install terraform and set the path (Only for windows) in environment varaibles
+3. Install aws cli
+4. aws configure  ( by giving user access key and secret)
+5. Write provider.tf  ( to configure aws during init phase)
+6. Write ec2.tf ( to create ec2 instance and security group with ingress and egress rules)
+
