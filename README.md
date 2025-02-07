@@ -289,3 +289,26 @@ terraform.tfstate --> It is a file terraform creates to know what it is created.
 If u update few parameters it will not recreate the resources it will just update the details
 For some resources, updating few parameters it will try to delete the existsing and recreate the new one with new details
 
+If maintain GIT or locally ppl can edit or in collaboration envrionment it will get changed wantedly or accidently.
+
+
+In collaboration environment we should maintain state file remotely, Also lock file is important to avoid parallel execution .
+
+In case of AWS provider we can store the statefile in S3 bucket.
+
+Steps to achive (Remote State)
+
+1.Create bucket in AWS
+2. Create table in dynamodb to do locking
+Table name and partition key (eg: LockID)
+sample code can be provide in terraform block ( mostly provider.tf)
+
+  backend "s3" {
+    bucket = "81s-feb-tf-state-mgmt"
+    key    = "expense-backend-dev"  #you should have unique keys with in the bucket same key should not be
+                                   # used in other repos or tf files
+    region = "us-east-1"
+    dynamodb_table = "tf-lock-state"
+
+  }
+
